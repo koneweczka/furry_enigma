@@ -33,6 +33,7 @@
 <script>
 export default {
   name: 'HelloWorld',
+  // Props - przekazuje argumenty do komponentów:
   props: {
     msg: String
   }

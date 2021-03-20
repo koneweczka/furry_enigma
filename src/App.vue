@@ -1,3 +1,4 @@
+<!-- To jest template do HTMLa -->
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
@@ -15,6 +16,7 @@ export default {
 }
 </script>
 
+<!-- To jest CSS do stylizacji: -->
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

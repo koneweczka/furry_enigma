@@ -3,7 +3,7 @@
         <ul>
             <!-- to jest FOR od składni vue; ten dwukropek w tym jest po  to, by to
             co jest potem uzyc dalej.
-            Ten klucz jest by vue rozroznialo rozne elemnty w liscie-->
+            Ten klucz jest by vue rozroznialo rozne elementy w liscie-->
             <li v-for="task in list" :key="task.summary">
                 {{ task.summary }}
             </li>
@@ -14,7 +14,7 @@
         oraz reagowania na zmiany value ww druga strone
         i to mowi mu, ze wez poczatkowe value z newTask 
         i jak ona sie zmieni to zmien tez to w komponencoe -->
-        <input v-model="newTask" type="text" />
+        <input v-model.trim="newTask" type="text" placeholder="type new task" />
         <button @click="addTask">Dodaj</button>
     </div>
 </template>
@@ -34,9 +34,14 @@ export default {
     // tu są funkcje do uzycia wszędzie:
     methods: {
         addTask() {
-            this.list.push({summary: this.newTask});
+            if (this.newTask !== "" && this.newTask !== null) {
+                this.list.push({summary: this.newTask})
+            } else {
+                alert("Type something.")
+            }
             this.newTask = null
         }
+                
     }
 }
 </script>
