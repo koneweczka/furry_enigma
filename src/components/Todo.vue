@@ -34,9 +34,14 @@ export default {
     // tu są funkcje do uzycia wszędzie:
     methods: {
         addTask() {
-            this.list.push({summary: this.newTask});
+            if (this.newTask !== "" && this.newTask !== null) {
+                this.list.push({summary: this.newTask})
+            } else {
+                alert("Type something.")
+            }
             this.newTask = null
         }
+                
     }
 }
 </script>
