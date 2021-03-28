@@ -23,4 +23,5 @@ pnpm-debug.log*
 *.sw?
 
 # My files to test:
-src/testowe.js
+src/test_remove.js
+src/test_edit.js

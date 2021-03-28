@@ -3,8 +3,9 @@
         <ul>
             <li v-for="task in list" :key="task.summary">
                 {{ task.summary }}
-                <RemoveTask v-model="list"/>
             </li>
+            <RemoveTask v-model="list"/>
+            <EditTask v-model="list"/>
         </ul>
         <AddTask v-model="list"/>
     </div>
@@ -14,10 +15,11 @@
 // tu chyba trzeba dać to:
 import AddTask from './AddTask.vue'
 import RemoveTask from './RemoveTask.vue'
+import EditTask from './EditTask.vue'
 
 export default {
     components: {
-    AddTask, RemoveTask
+    AddTask, RemoveTask, EditTask
     },
     // to zawiera zmienne uzywane wewn.
     data() {
