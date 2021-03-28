@@ -1,7 +1,8 @@
 <template>
     <div>
-        <input v-model.trim="newTask" type="text" placeholder="type new task" />
+        <input v-model.trim="newTask" type="text" placeholder="Type new task" />
         <button @click="addTask">Dodaj</button>
+
     </div>
 </template>
 
@@ -34,14 +35,25 @@ export default {
     // tu są funkcje do uzycia wszędzie:
     methods: {
         addTask() {
-            if (this.newTask !== "" && this.newTask !== null) {
+            if (this.list.some(i => i.summary == this.newTask)) {
+                alert("This task is already on the list.")
+            } else if (this.newTask !== "" && this.newTask !== null) {
                 this.list.push({summary: this.newTask})
                 this.$emit('input', this.list)
             } else {
                 alert("Type something.")
             }
+            // if (this.newTask !== "" && this.newTask !== null) {
+            //     this.list.push({summary: this.newTask})
+            //     this.$emit('input', this.list)
+            //     // czemu to nie działa???
+            // } else if (this.list.includes({summary: this.newTask})) {
+            //     alert("This task is already on the list.")
+            // } else {
+            //     alert("Type something.")
+            // }
             this.newTask = null
-        }   
+        }  
     }
 }
 </script>
