@@ -1,13 +1,13 @@
 <template>
     <div>
-        <button @click="removeTask(task)" v-for="task in list" :key="task.summary">Usuń</button>
+        <button @click="removeTask" >Usuń</button>
     </div>
 </template>
 
 <script>
 
 export default {
-    props: ['value'],
+    props: ['value', 'index'],
     data() {
         return {
             list: []
@@ -17,18 +17,18 @@ export default {
         value: {
             deep: true,
             immediate:true,
-            handler(deletedValue) {
-                this.list = deletedValue;
+            handler(value) {
+                this.list = value;
             }
         }
     },
     methods: {
-        removeTask(deleteTask) {
-            // Czy to jest dobry warunek??
-            if (deleteTask) {
-                const taskIndex = this.list.indexOf(deleteTask)
-                this.list.splice(taskIndex, 1)
-                this.$emit('button', this.list)
+        removeTask() {
+            // Czy to jest dobry warunek?? z tym -1 trzeba dawac jak robie tak
+            if (this.index > -1) {
+                this.list.splice(this.index, 1)
+                // input w emicie zawsze na edycje, usuwanie, dodawanie wszytsko na tym czycms
+                this.$emit('input', this.list)
             } else {
                 alert("Something goes wrong.")
             }

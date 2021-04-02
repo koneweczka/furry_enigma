@@ -1,13 +1,13 @@
 <template>
     <div>
         <ul>
-            <li v-for="task in list" :key="task.summary">
-                {{ task.summary }}
+            <li v-for="(task, index) in list" :key="task.summary">
+                {{ task.summary }}  
+                <RemoveTask v-model="list" :index="index" />
+                <EditTask v-model="list" :index="index" :task="task" />
             </li>
-            <RemoveTask v-model="list"/>
-            <EditTask v-model="list"/>
         </ul>
-        <AddTask v-model="list"/>
+        <AddTask v-model="list" />
     </div>
 </template>
 

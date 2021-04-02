@@ -27,8 +27,8 @@ export default {
             // to jest po to, aby to list [] sie zsynchronizowalo z tym list z Todo
             immediate: true,
             // funkcja, ktora to obsluguje i zawsze sie tak nazywa:
-            handler(newValue) {
-                this.list = newValue;
+            handler(value) {
+                this.list = value;
             }
         }
     },
@@ -43,15 +43,6 @@ export default {
             } else {
                 alert("Type something.")
             }
-            // if (this.newTask !== "" && this.newTask !== null) {
-            //     this.list.push({summary: this.newTask})
-            //     this.$emit('input', this.list)
-            //     // czemu to nie działa???
-            // } else if (this.list.includes({summary: this.newTask})) {
-            //     alert("This task is already on the list.")
-            // } else {
-            //     alert("Type something.")
-            // }
             this.newTask = null
         }  
     }
