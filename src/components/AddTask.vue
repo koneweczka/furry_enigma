@@ -9,7 +9,7 @@
 <script>
 
 export default {
-    //proposy ktore wchodza do komponntu sa niemodyfikowalne, wiec musze miec jeszcze raz list
+    //proposy ktore wchodza do komponentu sa niemodyfikowalne, wiec musze miec jeszcze raz list
     props: ['value'],
     data() {
         return {
@@ -21,7 +21,7 @@ export default {
     watch: {
         // pierwsze co jest nazwa pola, ktore obserwuje, a obserwuje value
         value: {
-            // mówi,  ewartosc ktora obsrwuje vue jest wartoscia zlozona i ma payrzec na wartosci tego i obiektow w tym, do arary i innych peirdol
+            // mówi,  wartosc ktora obsrwuje vue jest wartoscia zlozona i ma payrzec na wartosci tego i obiektow w tym, do arary i innych peirdol
             //aby poprawnie obsluizyc arraye i boiekty
             deep: true,
             // to jest po to, aby to list [] sie zsynchronizowalo z tym list z Todo
@@ -35,7 +35,8 @@ export default {
     // tu są funkcje do uzycia wszędzie:
     methods: {
         addTask() {
-            if (this.list.some(i => i.summary == this.newTask)) {
+            // to działa ale nie wiem czemu bez kropek tez??
+            if (this.list.some(i => i.summary == this.newTask || this.newTask.toLocaleLowerCase())) {
                 alert("This task is already on the list.")
             } else if (this.newTask !== "" && this.newTask !== null) {
                 this.list.push({summary: this.newTask})

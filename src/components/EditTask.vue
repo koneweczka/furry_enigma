@@ -2,8 +2,8 @@
     <div>
         <button @click="editTask" >Edytuj</button>
         <input v-if="edited" type=text  v-model="newTask.summary" />
-        <button v-if="edited">Zapisz</button>
-        <button v-if="edited">Anuluj</button>
+        <button v-if="edited" @click="saveTask">Zapisz</button>
+        <button v-if="edited" @click="cancelEdit">Anuluj</button>
     </div>
 </template>
 
@@ -38,13 +38,17 @@ export default {
     methods: {
         editTask() {
             this.edited = true
-            // if (editedTask) {
-            //     this.$emit('input', this.list)
-            //     console.log("Test.")
-                
-            // } else {
-            //     alert("Something goes wrong.")
-            // }
+        },
+        saveTask() {
+            if (this.edited && this.index > -1) {
+                this.list.splice(this.index, 1, this.newTask)
+                this.$emit('input', this.list)
+            } else {
+                alert("Something goes wrong.")
+            }
+        },
+        cancelEdit() {
+            alert("Coooo")
         }
     }
 }
