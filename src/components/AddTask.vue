@@ -45,7 +45,7 @@ export default {
                 alert("Type something.")
             }
             this.newTask = null
-        }  
+        } 
     }
 }
 </script>

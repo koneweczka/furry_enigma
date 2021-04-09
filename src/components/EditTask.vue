@@ -1,8 +1,8 @@
 <template>
     <div>
         <button @click="editTask" >Edytuj</button>
-        <input v-if="edited" type=text  v-model="newTask.summary" />
-        <button v-if="edited" @click="saveTask">Zapisz</button>
+        <input v-if="edited" type=text  v-model="newTask.summary" @keydown.enter="saveTask" @keyup.esc="cancelEdit"/>
+        <button v-if="edited" @click="saveTask" >Zapisz</button>
         <button v-if="edited" @click="cancelEdit">Anuluj</button>
     </div>
 </template>
@@ -47,9 +47,27 @@ export default {
                 alert("Something goes wrong.")
             }
         },
-        cancelEdit() {
-            alert("Coooo")
+        cancelEdit(key) {
+            if (this.edited && this.index > -1) {
+                console.log(key, this.edited, this.index);
+                this.$buefy.dialog.confirm({
+                    message: "Anulować zmiany?",
+                    cancelText: "Nie",
+                    confirmText: "Tak",
+                    canCancel: ["button", "outside"],
+                    onConfirm: () => {
+                        this.edited = false
+                        // tu musze miec nowy obiekt skopiowany
+                        this.newTask = Object.assign({}, this.task)
+                        this.$buefy.toast.open("Zmiany anulowane")}
+                })
+                // tego nie potrzebuje bo nic nie zmieniam
+                // this.$emit('keydown', this.list)
+            } else {
+                alert("Something goes wrong.")
+            }
         }
+        
     }
 }
 </script>
