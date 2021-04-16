@@ -25,3 +25,5 @@ pnpm-debug.log*
 # My files to test:
 src/test_remove.js
 src/test_edit.js
+src/components/Counter.vue
+src/components/Customer.vue

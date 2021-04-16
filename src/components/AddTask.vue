@@ -1,51 +1,25 @@
 <template>
     <div>
-        <input v-model.trim="newTask" type="text" placeholder="Type new task" />
+        <input v-model.trim="newTask" type="text" placeholder="Type new task"/>
         <button @click="addTask">Dodaj</button>
-
     </div>
 </template>
 
 <script>
 
 export default {
-    //proposy ktore wchodza do komponentu sa niemodyfikowalne, wiec musze miec jeszcze raz list
-    props: ['value'],
     data() {
         return {
-            list: [],
             newTask: null
-        }
-    },
-    // watch jest do sytuacji, kiedy chcesz zareagowac na zmiane jakiegos pola w danym komponencie, ze jak zmieni sie wartosc to zrob co
-    watch: {
-        // pierwsze co jest nazwa pola, ktore obserwuje, a obserwuje value
-        value: {
-            // mówi,  wartosc ktora obsrwuje vue jest wartoscia zlozona i ma payrzec na wartosci tego i obiektow w tym, do arary i innych peirdol
-            //aby poprawnie obsluizyc arraye i boiekty
-            deep: true,
-            // to jest po to, aby to list [] sie zsynchronizowalo z tym list z Todo
-            immediate: true,
-            // funkcja, ktora to obsluguje i zawsze sie tak nazywa:
-            handler(value) {
-                this.list = value;
-            }
         }
     },
     // tu są funkcje do uzycia wszędzie:
     methods: {
+        // tego contextu nie trzeba tu wciskać
         addTask() {
-            // to działa ale nie wiem czemu bez kropek tez??
-            if (this.list.some(i => i.summary == this.newTask || this.newTask.toLocaleLowerCase())) {
-                alert("This task is already on the list.")
-            } else if (this.newTask !== "" && this.newTask !== null) {
-                this.list.push({summary: this.newTask})
-                this.$emit('input', this.list)
-            } else {
-                alert("Type something.")
-            }
+            this.$store.dispatch('addTaskLogic', this.newTask)
             this.newTask = null
-        } 
+        }
     }
 }
 </script>

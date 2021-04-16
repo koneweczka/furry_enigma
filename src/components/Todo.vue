@@ -8,6 +8,7 @@
             </li>
         </ul>
         <AddTask v-model="list" />
+        <Customer/>
     </div>
 </template>
 
@@ -16,19 +17,17 @@
 import AddTask from './AddTask.vue'
 import RemoveTask from './RemoveTask.vue'
 import EditTask from './EditTask.vue'
+import Customer from './Customer.vue'
 
 export default {
     components: {
-    AddTask, RemoveTask, EditTask
+    AddTask, RemoveTask, EditTask,
+    Customer
     },
-    // to zawiera zmienne uzywane wewn.
-    data() {
-        return {
-            list: [
-                {summary: "Posprzątać kuchnię."},
-                {summary: "Wynieść śmieci."}
-            ]
-        };
+    computed: {
+        list() {
+            return this.$store.state.list
+        }
     }
 }
 </script>
