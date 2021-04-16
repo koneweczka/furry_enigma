@@ -10,22 +10,14 @@
 <script>
 
 export default {
-    props: ['value', 'index', 'task'],
+    props: ['index', 'task'],
     data() {
         return {
-            list: [],
             edited: false,
             newTask: {}
         }
     },
     watch: {
-        value: {
-            deep: true,
-            immediate: true,
-            handler(value) {
-                this.list = value;
-            }
-        },
         task: {
             deep: true,
             immediate: true,
@@ -40,13 +32,12 @@ export default {
             this.edited = true
         },
         saveTask() {
-            if (this.edited && this.index > -1) {
-                this.list.splice(this.index, 1, this.newTask)
-                this.$emit('input', this.list)
-            } else {
-                alert("Something goes wrong.")
+            if (this.edited) {
+                // dispatch nie moze miec 2 parametrow, wiec ten drugi musi byc jako obiekt
+                this.$store.dispatch('editTaskLogic', {index: this.index, newTask: this.newTask})
             }
         },
+        // cancel nie modyfikuje to moze tu zostac
         cancelEdit(key) {
             if (this.edited && this.index > -1) {
                 console.log(key, this.edited, this.index);
@@ -67,7 +58,6 @@ export default {
                 alert("Something goes wrong.")
             }
         }
-        
     }
 }
 </script>

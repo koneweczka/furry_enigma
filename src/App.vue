@@ -1,7 +1,7 @@
 <!-- To jest template do HTMLa -->
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="./assets/var.png" style="height=25px;weight=25px">
     <Todo />
     
   </div>
