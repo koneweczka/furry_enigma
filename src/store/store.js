@@ -1,39 +1,29 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import VuexPersistence from 'vuex-persist'
+
 
 Vue.use(Vuex)
 
+
+const vuexLocal = new VuexPersistence({
+    storage: window.localStorage
+  })
+
+function cleaner(task) {
+  let punct = /[!"#$%&'()*+,\-./\\:;<=>?@[\]^_`{|}~]/g;
+  return task.toLocaleLowerCase().replace(punct, "")
+}
+
 export default new Vuex.Store({
     state: {
-      count: 0,
-      totalTvCount: 10,
-      isLarryHappy: true, 
-      isJennyHappy: true,
-      // MOJE:
       list: [
         {summary: "Posprzątać kuchnię."},
         {summary: "Wynieść śmieci."}
       ]
     },
 
-    getters: {
-        // Check if both Larry and Jenny are happy
-        happyStaff: state => {
-          return state.isLarryHappy && state.isJennyHappy
-        }
-      },
-
     mutations: {
-      increment (state) {
-        state.count++
-      },
-      decrement (state) {
-        state.count--
-      },
-      removeTv(state, amount) {
-        state.totalTvCount -= amount
-      },
-      // MOJE:
       addTask(state, newTask) {
         state.list.push({summary: newTask})
       },
@@ -46,21 +36,17 @@ export default new Vuex.Store({
     },
 
     actions: {
-        removeTv(context, amount) {
-            if(context.state.totalTvCount >= amount) {
-                context.commit('removeTv', amount)
-              }
-        },
-        // MOJE
         addTaskLogic(context, newTask) {
-            // sprowadzasz oba do malych liter i spr zy jest takie samo
-            if (context.state.list.some(i => i.summary.toLocaleLowerCase() == newTask.toLocaleLowerCase())) {
-                alert("This task is already on the list.")
+            if (context.state.list.some(i => cleaner(i.summary) === cleaner(newTask))) {
+              alert("This task is already on the list.")
+              return false
             } else if (newTask !== "" && newTask !== null) {
                 // on ten context bierze z mutacji
                 context.commit('addTask', newTask)
+                return true
             } else {
                 alert("Type something.")
+                return false
             }
         },
         removeTaskLogic(context, index) {
@@ -77,6 +63,8 @@ export default new Vuex.Store({
                 alert("Something goes wrong.")
             }
         }
-    }
+    },
+
+    plugins: [vuexLocal.plugin]
   });
 

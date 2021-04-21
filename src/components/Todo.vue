@@ -8,7 +8,6 @@
             </li>
         </ul>
         <AddTask v-model="list" />
-        <Customer/>
     </div>
 </template>
 
@@ -17,12 +16,10 @@
 import AddTask from './AddTask.vue'
 import RemoveTask from './RemoveTask.vue'
 import EditTask from './EditTask.vue'
-import Customer from './Customer.vue'
 
 export default {
     components: {
-    AddTask, RemoveTask, EditTask,
-    Customer
+    AddTask, RemoveTask, EditTask
     },
     computed: {
         list() {
