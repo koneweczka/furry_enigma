@@ -23,7 +23,6 @@ pnpm-debug.log*
 *.sw?
 
 # My files to test:
-src/test_remove.js
-src/test_edit.js
+src/for_test
 src/components/Counter.vue
 src/components/Customer.vue
