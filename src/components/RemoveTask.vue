@@ -7,10 +7,10 @@
 <script>
 
 export default {
-    props: ['index'],
+    props: ['id'],
     methods: {
         removeTask() {
-            this.$store.dispatch('removeTaskLogic', this.index)
+            this.$store.dispatch('removeTaskLogic', this.id)
         }
     }
 }

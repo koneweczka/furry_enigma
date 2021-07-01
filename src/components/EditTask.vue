@@ -10,7 +10,8 @@
 <script>
 
 export default {
-    props: ['index', 'task'],
+    // tu wywalam ten index bo nie ejst potrzebny:
+    props: ['task'],
     data() {
         return {
             edited: false,
@@ -34,13 +35,13 @@ export default {
         saveTask() {
             if (this.edited) {
                 // dispatch nie moze miec 2 parametrow, wiec ten drugi musi byc jako obiekt
-                this.$store.dispatch('editTaskLogic', {index: this.index, newTask: this.newTask})
+                // tu sie daje to this.newTask bo ono trzyma id i summary
+                this.$store.dispatch('editTaskLogic', this.newTask)
             }
         },
         // cancel nie modyfikuje to moze tu zostac
-        cancelEdit(key) {
-            if (this.edited && this.index > -1) {
-                console.log(key, this.edited, this.index);
+        cancelEdit() {
+            if (this.edited) {
                 this.$buefy.dialog.confirm({
                     message: "Anulować zmiany?",
                     cancelText: "Nie",

@@ -1,10 +1,10 @@
 <template>
     <div>
         <ul>
-            <li v-for="(task, index) in list" :key="task.summary">
+            <li v-for="(task) in list" :key="task.id">
                 {{ task.summary }}  
-                <RemoveTask v-model="list" :index="index" />
-                <EditTask v-model="list" :index="index" :task="task" />
+                <RemoveTask v-model="list" :id="task.id" />
+                <EditTask v-model="list" :task="task" />
             </li>
         </ul>
         <AddTask v-model="list" />
@@ -21,9 +21,15 @@ export default {
     components: {
     AddTask, RemoveTask, EditTask
     },
+    // created czy mounted lepsze???
+    // mounted lepsze - poszukac roznicy
+    mounted() {
+        //
+        this.$store.dispatch('createListLogic');
+    },
     computed: {
         list() {
-            return this.$store.state.list
+            return this.$store.state.list;
         }
     }
 }
