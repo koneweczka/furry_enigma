@@ -16,10 +16,16 @@ export default {
     // tu są funkcje do uzycia wszędzie:
     methods: {
         // tego contextu nie trzeba tu wciskać
+        // async addTask() {
+        //         if ((await this.$store.dispatch('addTaskLogic', this.newTask)) === true) {
+        //             this.newTask = null
+        //         }   
+        // }
         async addTask() {
                 if ((await this.$store.dispatch('addTaskLogic', this.newTask)) === true) {
                     this.newTask = null
-                }   
+                }
+
         }
     }
 }

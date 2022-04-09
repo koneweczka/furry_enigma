@@ -32,11 +32,11 @@ export default {
         editTask() {
             this.edited = true
         },
-        saveTask() {
-            if (this.edited) {
+        async saveTask() {
                 // dispatch nie moze miec 2 parametrow, wiec ten drugi musi byc jako obiekt
                 // tu sie daje to this.newTask bo ono trzyma id i summary
-                this.$store.dispatch('editTaskLogic', this.newTask)
+            if ((await this.$store.dispatch('editTaskLogic', this.newTask)) === true) {
+                this.edited = false
             }
         },
         // cancel nie modyfikuje to moze tu zostac

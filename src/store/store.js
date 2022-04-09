@@ -46,57 +46,60 @@ export default new Vuex.Store({
     },
 
     actions: {
-      createListLogic({commit}) {
+      async createListLogic({commit}) {
         //to daje:
-        Vue.axios.get('/list').then(result => {
+        try {
+          const result = await Vue.axios.get('/list')
+          //tu dodałam returna:
           commit('createList', result.data);
-        }).catch(error => {
+          return true
+        } catch (error) {
           throw new Error(`API ${error}`);
-        })
+        }
       },
-        addTaskLogic(context, summary) {
+        async addTaskLogic(context, summary) {
             if (context.state.list.some(i => cleaner(i.summary) === cleaner(summary))) {
               alert("This task is already on the list.")
               return false
             } else if (summary !== "" && summary !== null) {
                 // tu muszę mieć obiekt z summary, bo go przyjmuję w tym poście
-                Vue.axios.post('/list', {summary}).then(result => {
-                  //nowe:
+                try {
+                  const result = await Vue.axios.post('/list', {summary})
                   // on ten context bierze z mutacji
                   context.commit('createList', result.data)
-                  // tego chyba nie potrzebuje
                   return true
-                }).catch(error => {
+                } catch (error) {
                   throw new Error(`API ${error}`);
-                });
+                }
             } else {
                 alert("Type something.")
                 return false
             }
         },
-        removeTaskLogic(context, id) {
+        async removeTaskLogic(context, id) {
             if (id > -1) {
-              Vue.axios.delete('/list/' + id).then(result => {
+              try {
+                const result = await Vue.axios.delete('/list/' + id)
                 //nowe
                 context.commit('createList', result.data)
                 return true
-              }).catch(error => {
+              } catch(error) {
                 throw new Error(`API ${error}`);
-              });
+              }
             } else {
                 alert("Something goes wrong.")
             }
         },
-        editTaskLogic(context, {id, summary}) {
-              Vue.axios.put('/list/' + id, {summary}).then(result => {
-                context.commit('createList', result.data)
-                return true
-              }).catch(error => {
-                throw new Error(`API ${error}`);
-              });
+        async editTaskLogic(context, {id, summary}) {
+          try {
+              const result = await Vue.axios.put('/list/' + id, {summary})
+              context.commit('createList', result.data)
+              return true
+          } catch(error) {
+              throw new Error(`API ${error}`);
+          }
         }
-    },
     // to tez jest do persista
     // plugins: [vuexLocal.plugin]
+      }
   });
-
