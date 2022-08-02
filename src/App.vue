@@ -17,7 +17,6 @@ export default {
 }
 </script>
 
-<!-- To jest CSS do stylizacji: -->
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
