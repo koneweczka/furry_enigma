@@ -12,7 +12,7 @@
 </template>
 
 <script>
-// tu chyba trzeba dać to:
+
 import AddTask from './AddTask.vue'
 import RemoveTask from './RemoveTask.vue'
 import EditTask from './EditTask.vue'
