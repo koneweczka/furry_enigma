@@ -1,4 +1,3 @@
-<!-- To jest template do HTMLa -->
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/var.jpeg" style="height=25px;weight=25px">
